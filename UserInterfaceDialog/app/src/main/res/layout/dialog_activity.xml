@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="사용자 이름"
+        android:textSize="20sp"
+        android:layout_margin="5dp"
+        android:textStyle="italic">
+    </TextView>
+
+    <EditText
+        android:id="@+id/edtName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="NAME"
+        android:background="#bcbcbc"
+        android:layout_margin="5dp">
+    </EditText>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="사용자 이메일"
+        android:textSize="20sp"
+        android:layout_margin="5dp"
+        android:textStyle="italic">
+    </TextView>
+
+    <EditText
+        android:id="@+id/edtEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:hint="EMAIL"
+        android:background="#bcbcbc"
+        android:layout_margin="5dp">
+    </EditText>
+
+
+</LinearLayout>

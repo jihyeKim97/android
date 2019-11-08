@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="15dp"
+    android:background="#ffffff"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txtInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30sp"
+        android:gravity="center"
+        android:text="USER INFORMATION"
+        android:textSize="30sp"></TextView>
+
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtInfo"
+        android:layout_marginLeft="10sp"
+        android:text="NAME"
+        android:textSize="20sp"></TextView>
+
+    <EditText
+        android:id="@+id/edtNameInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtName"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="25sp"></EditText>
+
+    <TextView
+        android:id="@+id/txtEamil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edtNameInput"
+        android:layout_marginLeft="10sp"
+        android:text="E-MAIL"
+        android:textSize="20sp"></TextView>
+
+    <EditText
+        android:id="@+id/edtEmailInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtEamil"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="25sp"></EditText>
+
+
+</RelativeLayout>

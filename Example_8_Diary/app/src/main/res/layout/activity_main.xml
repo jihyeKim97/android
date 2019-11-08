@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"></DatePicker>
+
+    <EditText
+        android:id="@+id/edtText"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:background="#bcbc"
+        android:gravity="center"
+        android:hint="[ DAILY TEXT ]\n▼▼▼▼"
+        android:textColorHint="#ffffff"
+        android:textSize="20sp"></EditText>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#bcbc"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btnEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#9E8E9E"
+            android:text="수정확인"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:textStyle="italic"></Button>
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/btnEdit"
+            android:background="#9E8E9E"
+            android:text="저장확인"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:textStyle="italic"></Button>
+
+        <Button
+            android:id="@+id/btnEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="9dp"
+            android:layout_toRightOf="@id/btnSave"
+            android:background="#9E8E9E"
+            android:text="완료"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:textStyle="italic"></Button>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

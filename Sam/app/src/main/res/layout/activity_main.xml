@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btnFileList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="에스디 카드 폴더 가져오기">
+
+    </Button>
+    <EditText
+        android:id="@+id/edtFileList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:hint="파일리스트 보기">
+
+    </EditText>
+</LinearLayout>
