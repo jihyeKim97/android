@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btnHoney"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:text="btnHoney" />
+
+    <Button
+        android:id="@+id/btnNate"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:text="btnNate" />
+
+    <Button
+        android:id="@+id/btnGallery"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:text="btnGallery" />
+
+    <Button
+        android:id="@+id/btnExit"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:text="btnExit" />
+
+</LinearLayout>

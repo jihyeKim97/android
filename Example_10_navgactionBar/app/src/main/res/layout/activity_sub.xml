@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="210dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="left"
+    android:background="#FF9800"
+    android:id="@+id/drawerMenu">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btnMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="#ffffff"
+            android:text="MENU"
+            android:textSize="20sp" />
+
+        <Button
+            android:layout_below="@id/btnMenu"
+            android:layout_marginTop="10dp"
+            android:id="@+id/btnGallery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GALLERY"
+            android:textSize="20sp"
+            android:background="#ffffff"/>
+        <Button
+            android:layout_below="@id/btnGallery"
+            android:layout_marginTop="10dp"
+            android:id="@+id/btnSlid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SILDESHOW"
+            android:textSize="20sp"
+            android:background="#ffffff"/>
+
+        <Button
+            android:layout_below="@id/btnSlid"
+            android:id="@+id/btnClose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="450dp"
+            android:background="#ffffff"
+            android:text="CLOSE"
+            android:textSize="20sp" />
+
+
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>

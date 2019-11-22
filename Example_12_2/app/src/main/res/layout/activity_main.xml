@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:id="@+id/txtViewName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="이름"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/edtName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/txtViewName"
+            android:layout_weight="20"
+            android:hint="e) AOA" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/line1">
+
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:id="@+id/txtViewPersonnel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="인원"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/edtPersonnel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/txtViewPersonnel"
+            android:layout_weight="20"
+            android:hint="e) 88" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/line3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/line2">
+        <Button
+            android:layout_marginRight="3dp"
+            android:background="#5771FA"
+            android:textColor="#ffffff"
+            android:layout_weight="1"
+            android:id="@+id/btnSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Setting"
+            android:textSize="13dp"/>
+        <Button
+            android:layout_marginRight="3dp"
+            android:background="#4A5FD3"
+            android:textColor="#ffffff"
+            android:layout_weight="1"
+            android:id="@+id/btnInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Input"
+            android:textSize="13dp"/>
+        <Button
+            android:layout_marginRight="3dp"
+            android:background="#4253BB"
+            android:textColor="#ffffff"
+            android:layout_weight="1"
+            android:id="@+id/btnEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit"
+            android:textSize="13dp"/>
+        <Button
+            android:layout_marginRight="3dp"
+            android:background="#334192"
+            android:textColor="#ffffff"
+            android:layout_weight="1"
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13dp"
+            android:text="Delete" />
+        <Button
+            android:layout_marginRight="3dp"
+        android:background="#25306D"
+        android:textColor="#ffffff"
+        android:layout_weight="1"
+        android:id="@+id/btnLookup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lookup"
+        android:textSize="13dp"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="3dp"
+        android:layout_below="@id/line3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="8"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:textStyle="italic"
+            android:id="@+id/edtNameResult"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="#8C94BD"
+            android:padding="20dp"
+            android:gravity="center"
+            android:text="# NAEM"
+            android:textColor="#ffffff"/>
+
+        <EditText
+            android:id="@+id/edtNumberResult"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#8C94BD"
+            android:gravity="center"
+            android:padding="20dp"
+            android:layout_weight="1"
+            android:text="# PERSONNAL"
+            android:textColor="#ffffff"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+
+
+</RelativeLayout>

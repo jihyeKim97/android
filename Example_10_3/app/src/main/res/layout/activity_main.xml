@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:gravity="center"
+    android:layout_margin="10dp">
+
+    <EditText
+        android:id="@+id/Number1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="숫자 1입력"
+        android:textSize="20sp"
+        ></EditText>
+
+    <EditText
+        android:id="@+id/Number2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Number1"
+        android:layout_margin="10dp"
+        android:hint="숫자 2입력"
+        android:textSize="20sp"></EditText>
+
+    <RadioGroup
+        android:id="@+id/rdoG"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Number2"
+        android:layout_margin="10dp">
+
+        <RadioButton
+            android:layout_margin="10dp"
+            android:id="@+id/rdoPlus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="더하기"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:layout_margin="10dp"
+            android:id="@+id/rdoSub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="빼기"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:layout_margin="10dp"
+            android:id="@+id/rdoMul"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="곱하기"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:layout_margin="10dp"
+            android:id="@+id/rdoDiv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="나누기"
+            android:textSize="20sp" />
+    </RadioGroup>
+    <Button
+        android:id="@+id/btnCal"
+        android:layout_margin="10dp"
+        android:layout_below="@id/rdoG"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="계산"
+        android:textSize="20sp"/>
+
+
+</RelativeLayout>

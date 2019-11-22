@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:id="@+id/line4"
+        android:layout_marginTop="3dp"
+        android:layout_above="@id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="8"
+        android:orientation="horizontal" >
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF">
+
+        </ListView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_above="@id/line2"
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:id="@+id/txtViewName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="이름"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/edtName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/txtViewName"
+            android:layout_weight="20"
+            android:hint="e) AOA" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginBottom="10dp"
+        android:layout_above="@id/line3"
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:id="@+id/txtViewPersonnel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="인원"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/edtPersonnel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/txtViewPersonnel"
+            android:layout_weight="20"
+            android:hint="e) 88" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/line3"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:layout_marginRight="3dp"
+            android:background="#EC407A"
+            android:textColor="#ffffff"
+            android:layout_weight="1"
+            android:id="@+id/btnSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Setting"
+            android:textSize="13dp"/>
+        <Button
+            android:layout_marginRight="3dp"
+            android:background="#AB47BC"
+            android:textColor="#ffffff"
+            android:layout_weight="1"
+            android:id="@+id/btnInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Input"
+            android:textSize="13dp"/>
+        <Button
+            android:layout_marginRight="3dp"
+            android:background="#7E57C2"
+            android:textColor="#ffffff"
+            android:layout_weight="1"
+            android:id="@+id/btnEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit"
+            android:textSize="13dp"/>
+        <Button
+            android:layout_marginRight="3dp"
+            android:background="#5C6BC0"
+            android:textColor="#ffffff"
+            android:layout_weight="1"
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13dp"
+            android:text="Delete" />
+        <Button
+            android:layout_marginRight="3dp"
+            android:background="#42A5F5"
+            android:textColor="#ffffff"
+            android:layout_weight="1"
+            android:id="@+id/btnLookup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lookup"
+            android:textSize="13dp"/>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

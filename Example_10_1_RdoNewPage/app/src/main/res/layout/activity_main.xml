@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:gravity="center">
+
+<RadioGroup
+    android:id="@+id/rdoG"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+    <RadioButton
+        android:id="@+id/rdo2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SECOND_ACTIVITY"
+        android:textSize="20sp"
+        android:layout_margin="10dp">
+    </RadioButton>
+    <RadioButton
+        android:id="@+id/rdo3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="THIRD_ACTIVITY"
+        android:textSize="20sp"
+        android:layout_margin="10dp">
+</RadioButton>
+</RadioGroup>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnOpen"
+        android:textSize="25sp"
+        android:background="#FF9800"
+        android:text="open"
+        android:textColor="#ffffff"
+        android:layout_below="@id/rdoG">
+    </Button>
+</RelativeLayout>

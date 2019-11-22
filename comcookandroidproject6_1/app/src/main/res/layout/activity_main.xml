@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Chronometer
+        android:id="@+id/chronometer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#bcbcbc"
+        android:format="예약에 걸린 시간 %s"
+        android:gravity="center"
+        android:textColor="#ff0900"
+        android:textSize="25sp" />
+
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/chronometer">
+
+        <RadioGroup
+            android:id="@+id/rdoGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/chronometer"
+            android:layout_marginTop="2dp">
+
+            <RadioButton
+                android:id="@+id/rdoHour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="시간 설정"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/rdoDay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="날짜 설정"
+                android:textSize="15sp" />
+        </RadioGroup>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/rdoGroup">
+
+            <CalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:showWeekNumber="false"
+                android:layout_gravity="center"
+               />
+
+            <TimePicker
+                android:id="@+id/timePicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:timePickerMode="spinner" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#bcbcbc"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_gravity="bottom">
+
+            <TextView
+                android:id="@+id/Year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0000년" />
+
+            <TextView
+                android:id="@+id/Month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00월" />
+
+            <TextView
+                android:id="@+id/Day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00일" />
+
+            <TextView
+                android:id="@+id/Hour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00시" />
+
+            <TextView
+                android:id="@+id/Minute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00분" />
+
+            <TextView
+                android:id="@+id/Message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  예약됨" />
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+
+</RelativeLayout>

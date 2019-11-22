@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_1"
+        android:enabled="true"
+        android:icon="@drawable/one"
+        android:title="one" />
+    <item
+        android:id="@+id/action_2"
+        android:enabled="true"
+        android:icon="@drawable/two"
+        android:title="two" />
+    <item
+        android:id="@+id/action_3"
+        android:enabled="true"
+        android:icon="@drawable/three"
+        android:title="three" />
+    <item
+        android:id="@+id/action_4"
+        android:enabled="true"
+        android:icon="@drawable/four"
+        android:title="four" />
+    <item
+        android:id="@+id/action_5"
+        android:enabled="true"
+        android:icon="@drawable/five"
+        android:title="five" />
+</menu>

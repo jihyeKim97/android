@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_margin="70dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_margin="7dp"
+            android:id="@+id/btn1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="버튼1"
+            android:textSize="20dp"
+            android:background="#f77"/>
+
+        <Button
+            android:layout_margin="7dp"
+            android:id="@+id/btn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="버튼2"
+            android:textSize="20dp"
+            android:background="#f77"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="70dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <Button
+            android:layout_margin="7dp"
+            android:id="@+id/btn3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="버튼3"
+            android:textSize="20dp"
+            android:background="#f77"/>
+
+        <Button
+            android:layout_margin="7dp"
+            android:id="@+id/btn4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="버튼4"
+            android:textSize="20dp"
+            android:background="#f77"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="70dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+        <Button
+            android:layout_margin="7dp"
+            android:id="@+id/btn5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="버튼5"
+            android:textSize="20dp"
+            android:background="#f77"/>
+
+        <Button
+            android:layout_margin="7dp"
+            android:id="@+id/btn6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="버튼6"
+            android:textSize="20dp"
+            android:background="#f77"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>
