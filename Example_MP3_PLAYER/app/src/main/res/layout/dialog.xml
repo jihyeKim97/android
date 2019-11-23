@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#AAB6C0"
+        android:background="@color/kimColor_SkyBlue1"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -27,8 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:background="#AAB6C0"
-            android:hint="  e) 안드로이드5 "
+            android:background="@color/kimColor_SkyBlue1"
             android:textColorHint="#ffffff"
             android:textSize="20sp" />
 
@@ -37,7 +36,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#AAB6C0"
+        android:background="@color/kimColor_SkyBlue1"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -55,8 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:background="#AAB6C0"
-            android:hint="   e) 김동진과 아이들 "
+            android:background="@color/kimColor_SkyBlue1"
             android:textColorHint="#ffffff"
             android:textSize="20sp" />
 

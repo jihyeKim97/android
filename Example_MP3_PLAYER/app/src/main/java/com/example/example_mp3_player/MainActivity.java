@@ -1,23 +1,22 @@
 package com.example.example_mp3_player;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.SystemClock;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SeekBar;
@@ -29,7 +28,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ListView listViewMP3;
     private SeekBar seekBar;
@@ -37,12 +36,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton btPlay, btPause, btMyList;
 
     public static SQLiteDatabase sqlDB;
-    public static myDBHelper myDBHelper;
+    public static MyDBHelper myDBHelper;
 
     private MyAdapter adapter;
     private MediaPlayer mediaPlayer = new MediaPlayer();
     private ArrayList<MyData> list = new ArrayList<>();
-    private String selectedMP3;
+    public static String selectedMP3;
 
     public static final String MP3_PATH = Environment.getExternalStorageDirectory().getPath() + "/";
 
@@ -60,34 +59,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btPause = findViewById(R.id.btPause);
         btMyList = findViewById(R.id.btMyList);
 
-        myDBHelper = new myDBHelper(this);
+        myDBHelper = new MyDBHelper(this);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE);
         getFileList();
 
         MyAdapter adapter = new MyAdapter(list, R.layout.listview_item, MainActivity.this);
         listViewMP3.setAdapter(adapter);
-        listViewMP3.setItemChecked(0, true);
         listViewMP3.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
+                //dailog.xml을 객체화 시킨다
+                View dialogView = View.inflate(MainActivity.this, R.layout.dialog, null);
+                final EditText edtAlbum = dialogView.findViewById(R.id.edtAlbum);
+                final EditText edtSinger = dialogView.findViewById(R.id.edtSinger);
+                edtAlbum.setText(list.get(position).getAblumId());
+                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                dialog.setTitle("좋아요 등록");
+                dialog.setView(dialogView);
+                dialog.setPositiveButton("등록", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        myDBHelper = new MyDBHelper(MainActivity.this);
+                        sqlDB = myDBHelper.getWritableDatabase();
+                        sqlDB.execSQL("INSERT INTO musicTBL VALUES('" + edtAlbum.getText().toString() + "','" + edtSinger.getText().toString() + "');");
+                        sqlDB.close();
+                        toastDisplay("Your wish list contains the songs you selected");
+                    }
+                });
 
-
-                sqlDB = myDBHelper.getWritableDatabase();
-                sqlDB.execSQL("INSERT INTO groupTBL values();");
-                sqlDB.close();
-                toastDisplay("Your wish list contains the songs you selected");
+                dialog.setNegativeButton("취소",null);
+                dialog.show();
                 return false;
             }
         });//end of OnItemLongClickListener
 
-        listViewMP3.setOnItemClickListener(this);
+//        listViewMP3.setOnItemClickListener(this);
         btPlay.setOnClickListener(this);
         btPause.setOnClickListener(this);
         btMyList.setOnClickListener(this);
 
         buttonSetting(true, false, 0);
-
 
 
     }
@@ -106,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             if (extendSting.equals("mp3") || extendSting.equals("mp4")) {
 
-                list.add(new MyData(fileName,null));
+                list.add(new MyData(fileName, null));
             }
         }
     }//end of FileList
@@ -216,8 +228,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }//end of Toast message
 
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        selectedMP3 = list.get(position).getAblumId();
-    }
+//    @Override
+//    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//        selectedMP3 = list.get(position).getAblumId();
+//    }
 }

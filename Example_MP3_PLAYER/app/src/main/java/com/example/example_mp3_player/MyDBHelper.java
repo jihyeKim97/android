@@ -6,15 +6,15 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-public class myDBHelper extends SQLiteOpenHelper {
+public class MyDBHelper extends SQLiteOpenHelper {
 
-    public myDBHelper(@Nullable Context context) {
+    public MyDBHelper(@Nullable Context context) {
         super(context,"musicDB",null,1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE  musicTBL ( malbum CHAR(20) PRIMARY KEY, msinger INTEGER);");
+        db.execSQL("CREATE TABLE  musicTBL ( malbum CHAR(20) PRIMARY KEY, msinger CHAR);");
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.example_mp3_player;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,22 +9,21 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import androidx.appcompat.view.menu.MenuView;
-
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
+import static com.example.example_mp3_player.MainActivity.myDBHelper;
 import static com.example.example_mp3_player.MainActivity.selectedMP3;
+import static com.example.example_mp3_player.MainActivity.sqlDB;
 
 
-public class MyAdapter extends BaseAdapter {
+public class MyWishAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private ArrayList<MyData> list;
     // 레이아웃의 아이디
     private int layoutID;
     private Context context;
 
-    public MyAdapter(ArrayList<MyData> list, int layoutID, Context context) {
+    public MyWishAdapter(ArrayList<MyData> list, int layoutID, Context context) {
         this.list = list;
         this.layoutID = layoutID;
         this.context = context;
@@ -46,7 +46,7 @@ public class MyAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
         //객체를 만들어서 진짜 만드는것
         if (convertView == null) {
             convertView = inflater.inflate(layoutID, null);
@@ -58,21 +58,6 @@ public class MyAdapter extends BaseAdapter {
         txtSinger.setText(list.get(position).getSingerId());
 
         txtAlbum.setTag(position);
-        txtAlbum.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                v.setBackgroundColor(Color.RED);
-
-                return true;
-            }
-        });
-
-        txtAlbum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectedMP3 = list.get(position).getAblumId();
-            }
-        });
 
         return convertView;
     }
