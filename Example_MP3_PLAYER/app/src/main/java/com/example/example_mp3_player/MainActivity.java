@@ -9,15 +9,20 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.drawable.PaintDrawable;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -28,8 +33,11 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import static android.graphics.Color.GRAY;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private LinearLayout line1;
     private ListView listViewMP3;
     private SeekBar seekBar;
     private TextView textViewPlayingState, textViewPlayingMusicName;
@@ -58,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btPlay = findViewById(R.id.btPlay);
         btPause = findViewById(R.id.btPause);
         btMyList = findViewById(R.id.btMyList);
+        line1 = findViewById(R.id.line1);
 
         myDBHelper = new MyDBHelper(this);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE);
@@ -65,36 +74,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         MyAdapter adapter = new MyAdapter(list, R.layout.listview_item, MainActivity.this);
         listViewMP3.setAdapter(adapter);
+        listViewMP3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectedMP3 = list.get(position).getAblumId();
+            }
+        });
         listViewMP3.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
+                selectedMP3 = list.get(position).getAblumId();
                 //dailog.xml을 객체화 시킨다
-                View dialogView = View.inflate(MainActivity.this, R.layout.dialog, null);
+                View dialogView = View.inflate(view.getContext(), R.layout.dialog, null);
                 final EditText edtAlbum = dialogView.findViewById(R.id.edtAlbum);
                 final EditText edtSinger = dialogView.findViewById(R.id.edtSinger);
                 edtAlbum.setText(list.get(position).getAblumId());
-                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
-                dialog.setTitle("좋아요 등록");
+                AlertDialog.Builder dialog = new AlertDialog.Builder(view.getContext());
+                dialog.setTitle("[ MY_PLAY_LIST ]");
                 dialog.setView(dialogView);
-                dialog.setPositiveButton("등록", new DialogInterface.OnClickListener() {
+                dialog.setPositiveButton("내맘속에 저장", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        myDBHelper = new MyDBHelper(MainActivity.this);
-                        sqlDB = myDBHelper.getWritableDatabase();
-                        sqlDB.execSQL("INSERT INTO musicTBL VALUES('" + edtAlbum.getText().toString() + "','" + edtSinger.getText().toString() + "');");
-                        sqlDB.close();
-                        toastDisplay("Your wish list contains the songs you selected");
+                        try {
+                            myDBHelper = new MyDBHelper(MainActivity.this);
+                            sqlDB = myDBHelper.getWritableDatabase();
+                            sqlDB.execSQL("INSERT INTO musicTBL VALUES('" + edtAlbum.getText().toString() + "','" + edtSinger.getText().toString() + "');");
+                            sqlDB.close();
+                            Toast.makeText(getApplicationContext(), "Your wish list contains the songs you selected", Toast.LENGTH_LONG).show();
+                        } catch (Exception e) {
+                            toastDisplay("중복된 음악입니다");
+                        }
                     }
                 });
 
-                dialog.setNegativeButton("취소",null);
+                dialog.setNegativeButton("안해안해!", null);
                 dialog.show();
-                return false;
-            }
-        });//end of OnItemLongClickListener
 
-//        listViewMP3.setOnItemClickListener(this);
+                return true;
+            }
+        });
         btPlay.setOnClickListener(this);
         btPause.setOnClickListener(this);
         btMyList.setOnClickListener(this);
@@ -103,7 +121,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
-
 
     //-------------------------------------------------------------------------------------------------------------------------------------
 
@@ -160,7 +177,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mediaPlayer.start();
 
             buttonSetting(false, true, 0);
-            textViewPlayingMusicName.setText("RUNNING MUSIC -  " + selectedMP3);
+            textViewPlayingMusicName.setText(selectedMP3);
+            toastDisplay("현재 듣고 계신 음악은 [ " + textViewPlayingMusicName.getText().toString() + " ] 입니다");
 
             Thread thread = new Thread() {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
@@ -196,6 +214,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }//end of buttonPlayAction
 
     //------------------------------------------------------------------------------------------------------------------------------------

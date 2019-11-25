@@ -2,13 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#FFFFFF"
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/line1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#CACACA"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -16,8 +15,7 @@
             android:id="@+id/imageView"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:background="#ffffff"
-            android:src="@drawable/music_basic" />
+            android:src="@drawable/ironman" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -32,7 +30,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:text="ALBUM"
-                android:textColor="#ffffff"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -42,7 +39,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:text="SINGER"
-                android:textColor="#ffffff"
                 android:textSize="8sp" />
 
         </LinearLayout>

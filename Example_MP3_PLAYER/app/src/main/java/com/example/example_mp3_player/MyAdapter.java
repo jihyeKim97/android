@@ -1,18 +1,24 @@
 package com.example.example_mp3_player;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.menu.MenuView;
 
 import java.util.ArrayList;
 import java.util.zip.Inflater;
 
+import static android.graphics.Color.GRAY;
 import static com.example.example_mp3_player.MainActivity.selectedMP3;
 
 
@@ -54,25 +60,17 @@ public class MyAdapter extends BaseAdapter {
         TextView txtAlbum = convertView.findViewById(R.id.txtAlbum);
         TextView txtSinger = convertView.findViewById(R.id.txtSinger);
 
+        LinearLayout line1 = convertView.findViewById(R.id.line1);
         txtAlbum.setText(list.get(position).getAblumId());
         txtSinger.setText(list.get(position).getSingerId());
 
         txtAlbum.setTag(position);
-        txtAlbum.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                v.setBackgroundColor(Color.RED);
-
-                return true;
-            }
-        });
-
-        txtAlbum.setOnClickListener(new View.OnClickListener() {
+      /*  txtAlbum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectedMP3 = list.get(position).getAblumId();
             }
-        });
+        });*/
 
         return convertView;
     }
