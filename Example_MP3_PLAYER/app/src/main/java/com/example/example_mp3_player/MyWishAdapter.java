@@ -15,7 +15,7 @@ import static com.example.example_mp3_player.MainActivity.myDBHelper;
 import static com.example.example_mp3_player.MainActivity.selectedMP3;
 import static com.example.example_mp3_player.MainActivity.sqlDB;
 
-
+//찜 목록에서 사용되는 어뎁터
 public class MyWishAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private ArrayList<MyData> list;

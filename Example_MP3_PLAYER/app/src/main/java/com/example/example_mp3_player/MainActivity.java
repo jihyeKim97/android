@@ -72,17 +72,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE);
         getFileList();
 
+        //어뎁터를 객체로 만들어 내가 만든 xml을 적용시킨다
         MyAdapter adapter = new MyAdapter(list, R.layout.listview_item, MainActivity.this);
+        //만든 어뎁터를 listViewMP3라는 ListView에 적용시킨다
         listViewMP3.setAdapter(adapter);
+        //ListView의 내가 원하는 곡을 눌렀을때 List의 위치값을 앨범아이디로 받아와 selectedMP3에 적용
         listViewMP3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selectedMP3 = list.get(position).getAblumId();
             }
         });
+        //리스트 뷰의 칸을 길게 눌렀을때 발생되는 이벤트
         listViewMP3.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                //앨범 이름을  String selectedMP3을 넣는다(선택한 곡을 재생시킬수 있게 해주는 행동)
                 selectedMP3 = list.get(position).getAblumId();
                 //dailog.xml을 객체화 시킨다
                 View dialogView = View.inflate(view.getContext(), R.layout.dialog, null);
@@ -90,17 +95,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 final EditText edtSinger = dialogView.findViewById(R.id.edtSinger);
                 edtAlbum.setText(list.get(position).getAblumId());
                 AlertDialog.Builder dialog = new AlertDialog.Builder(view.getContext());
-                dialog.setTitle("[ MY_PLAY_LIST ]");
+                dialog.setTitle("[ MY PLAY LIST ]");
                 dialog.setView(dialogView);
-                dialog.setPositiveButton("내맘속에 저장", new DialogInterface.OnClickListener() {
+                dialog.setPositiveButton("♬내맘속에 저장♬", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         try {
+                            //모달창을 띄어서 내가 원하는 작곡자의 이름을 넣어 DB에 저장하고 중복이 되면 트라이 캐치로 막음
                             myDBHelper = new MyDBHelper(MainActivity.this);
                             sqlDB = myDBHelper.getWritableDatabase();
                             sqlDB.execSQL("INSERT INTO musicTBL VALUES('" + edtAlbum.getText().toString() + "','" + edtSinger.getText().toString() + "');");
                             sqlDB.close();
-                            Toast.makeText(getApplicationContext(), "Your wish list contains the songs you selected", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "♬내 마음속에 저장♬", Toast.LENGTH_LONG).show();
                         } catch (Exception e) {
                             toastDisplay("중복된 음악입니다");
                         }
@@ -125,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //-------------------------------------------------------------------------------------------------------------------------------------
 
     //FileList
+    //mp3와 mp4가 포함되어있는 이름들만 가져와 list에 담아 준다
     private void getFileList() {
 
         File[] fileList = new File(MP3_PATH).listFiles();
@@ -143,6 +150,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //-------------------------------------------------------------------------------------------------------------------------------------
 
     //buttonSetting
+    //버튼을 셋팅
+    //버튼 셋팅을 하지 않으면 어떠한 오류가 날수 있으니 그것을 방지 하기위해서 사용
     private void buttonSetting(boolean b, boolean b1, int progress) {
         btPlay.setClickable(b);
         btPause.setClickable(b1);
@@ -176,40 +185,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mediaPlayer.prepare();
             mediaPlayer.start();
 
+            //버튼 셋팅
             buttonSetting(false, true, 0);
             textViewPlayingMusicName.setText(selectedMP3);
             toastDisplay("현재 듣고 계신 음악은 [ " + textViewPlayingMusicName.getText().toString() + " ] 입니다");
 
+            //
             Thread thread = new Thread() {
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
 
-                @RequiresApi(api = Build.VERSION_CODES.O)
-                @Override
-                public void run() {
-
-                    if (mediaPlayer == null) {
-                        return;
-                    }
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            textViewPlayingState.setText(selectedMP3 + mediaPlayer.getDuration());
-                            seekBar.setMax(mediaPlayer.getDuration());
-                        }
-                    });
-                    while (mediaPlayer.isPlaying()) {
-                        runOnUiThread(new Runnable() {
+                            //재생도 하면서 메인스레드도 같이 돈다
+                            @RequiresApi(api = Build.VERSION_CODES.O)
                             @Override
                             public void run() {
-                                seekBar.setProgress(mediaPlayer.getCurrentPosition());
-                                textViewPlayingState.setText(simpleDateFormat.format(mediaPlayer.getCurrentPosition()));
-                            }
-                        });
-                        SystemClock.sleep(1500);
+
+                                if (mediaPlayer == null) {
+                                    return;
+                                }
+
+                                //노래재생에 관해서 상태를 표시해 주는 위젯들의 값을 바꾼다
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        textViewPlayingState.setText(selectedMP3 + mediaPlayer.getDuration());
+                                        //시크바의 최대 길이 만큼 표시 후 셋팅
+                                        seekBar.setMax(mediaPlayer.getDuration());
+                                    }
+                                });
+                                //시크바의 재생길이 만큼 움직인다(노래재생시간 = 시크바의 싱크)
+                                while (mediaPlayer.isPlaying()) {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            //미디어 플레이어의 현 시간 만큼 움직인다
+                                            seekBar.setProgress(mediaPlayer.getCurrentPosition());
+                                            textViewPlayingState.setText(simpleDateFormat.format(mediaPlayer.getCurrentPosition()));
+                                        }
+                                    });
+                                    //시스템의 과부하를 막기위해 0.15초동안 스레드가 정지한다
+                        SystemClock.sleep(150);
                     }
                 }
             };
 
+            //스레드 시작
             thread.start();
         } catch (IOException e) {
             e.printStackTrace();
@@ -220,6 +239,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //------------------------------------------------------------------------------------------------------------------------------------
 
     //btPause Button EventAction
+    //버튼을 중지 하였을때 음악은 멈추고 다시 재생을 누르면 처음부터 재생
     private void buttonPauseAction() {
         mediaPlayer.stop();
         mediaPlayer.reset();
@@ -233,6 +253,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //-------------------------------------------------------------------------------------------------------------------------------------
 
     //btMyList Button EventAction
+    //찜 이미지 버튼을 눌렀을 때 인텐트로 화면 전환
     private void buttonMyListAction() {
         Intent intent = new Intent(MainActivity.this, SubActivity.class);
         startActivity(intent);
@@ -242,13 +263,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // -------------------------------------------------------------------------------------------------------------------------------------
 
     //Toast message
+    //토스트 메세지
     private void toastDisplay(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }//end of Toast message
 
-
-//    @Override
-//    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//        selectedMP3 = list.get(position).getAblumId();
-//    }
 }
