@@ -11,7 +11,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
     //핸드폰 내부에서 쓰는 디비
     //생성자에서 데이터 베이스를 만든다
     public MyDBHelper(@Nullable Context context) {
-        super(context,"musicDB",null,1);
+        super(context, "musicDB", null, 1);
     }
 
     // = 콜백함수 생성자가 만들어지면 자동으로 onCreate가 만들어진다

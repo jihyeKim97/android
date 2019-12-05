@@ -104,7 +104,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             //모달창을 띄어서 내가 원하는 작곡자의 이름을 넣어 DB에 저장하고 중복이 되면 트라이 캐치로 막음
                             myDBHelper = new MyDBHelper(MainActivity.this);
                             sqlDB = myDBHelper.getWritableDatabase();
-                            sqlDB.execSQL("INSERT INTO musicTBL VALUES('" + edtAlbum.getText().toString() + "','" + edtSinger.getText().toString() + "');");
+                            sqlDB.execSQL("INSERT INTO musicTBL VALUES('" + edtAlbum.getText().toString() + "','"
+                                    + edtSinger.getText().toString() + "');");
                             sqlDB.close();
                             Toast.makeText(getApplicationContext(), "♬내 마음속에 저장♬", Toast.LENGTH_LONG).show();
                         } catch (Exception e) {

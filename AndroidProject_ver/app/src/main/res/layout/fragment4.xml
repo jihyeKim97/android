@@ -3,11 +3,6 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="#E651FF">
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="4번화면"
-    android:textColor="#ffffff"
-    android:textSize="40dp"></TextView>
+  >
+
 </LinearLayout>
