@@ -1,4 +1,4 @@
-package com.example.androidproject_ver.Calender.Calender_LIstView;
+package com.example.householderproject.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,23 +10,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.swipe.SwipeLayout;
-import com.example.androidproject_ver.MainActivity;
-import com.example.androidproject_ver.R;
+import com.example.householderproject.R;
+import com.example.householderproject.model.CalendarListData;
 
 import java.util.ArrayList;
 
-public class MyList_Adapter extends BaseAdapter {
+public class CalendarListAdapter extends BaseAdapter {
+
     // 레이아웃의 아이디를 가지고 인플레이터를 이용해서 객체만듬
     private LayoutInflater inflater;
     //데이터
-    private ArrayList<MyList_Data> list;
+    private ArrayList<CalendarListData> list;
     // 레이아웃의 아이디
     private int layoutID;
     //어뎁터가 어디서 사용될지 알아야 한다
     private Context context;
 
 
-    public MyList_Adapter(ArrayList<MyList_Data> list, int layoutID, Context context) {
+    public CalendarListAdapter(ArrayList<CalendarListData> list, int layoutID, Context context) {
         this.list = list;
         this.layoutID = layoutID;
         this.context = context;
@@ -64,15 +65,16 @@ public class MyList_Adapter extends BaseAdapter {
         }else if(listTextViewRdo.getText().toString().equals("지출")){
             listImgView.setImageResource(R.mipmap.expenditure);
         }*/
-        if(list.get(position).getCoinrdo().equals("수입")){
+
+        if(list.get(position).getDetail().equals("수입")){
             listImgView.setImageResource(R.mipmap.income);
         }else {
             listImgView.setImageResource(R.mipmap.expenditure);
         }
 
-        listTextViewRdo.setText(list.get(position).getCoinrdo());
-        listTextViewCombo.setText(list.get(position).getCoinfilter());
-        listTextViewEdt.setText(list.get(position).getCoinedttxt());
+        listTextViewRdo.setText(list.get(position).getDetail());
+        listTextViewCombo.setText(list.get(position).getCategory());
+        listTextViewEdt.setText(list.get(position).getCredit());
 
         listTextViewCombo.setTag(position);
 

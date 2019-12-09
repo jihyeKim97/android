@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,10 +20,9 @@
             android:src="@mipmap/income" />
 
         <LinearLayout
-            android:layout_width="60dp"
+            android:layout_width="94dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="2dp"
             android:orientation="vertical">
 
             <TextView
@@ -47,13 +46,13 @@
 
         </LinearLayout>
 
-            <TextView
-                android:id="@+id/listTextViewEdt"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:gravity="center"
-                android:hint="해당 요일의 수입" />
+        <TextView
+            android:id="@+id/listTextViewEdt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:hint="해당 요일의 수입" />
 
         <ImageView
             android:layout_width="30dp"

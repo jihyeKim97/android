@@ -6,21 +6,21 @@ public class MyList_Data {
     private String coinrdo;
     private String coinedttxt;
     private String coinfilter;
-    private int image;
+    private String edtwhere;
 
-    public MyList_Data(String date, String coinrdo, String coinedttxt, String coinfilter, int image) {
+    public MyList_Data(String date, String coinrdo, String coinedttxt, String coinfilter, String edtwhere) {
         this.date = date;
         this.coinrdo = coinrdo;
         this.coinedttxt = coinedttxt;
         this.coinfilter = coinfilter;
-        this.image = image;
+        this.edtwhere = edtwhere;
     }
 
     //리스트나 데이타형식에 맞게
     public MyList_Data(String coinrdo, String coinfilter, String coinedttxt) {
-        this.coinrdo = coinrdo;
-        this.coinfilter = coinfilter;
-        this.coinedttxt = coinedttxt;
+            this.coinrdo = coinrdo;
+            this.coinfilter = coinfilter;
+            this.coinedttxt = coinedttxt;
     }
 //db에 들어갈꺼
     public MyList_Data(String date, String coinrdo, String coinfilter, String coinedttxt) {
@@ -29,6 +29,10 @@ public class MyList_Data {
         this.coinfilter = coinfilter;
         this.coinedttxt = coinedttxt;
     }
+
+    public String getEdtwhere() { return edtwhere; }
+
+    public void setEdtwhere(String edtwhere) { this.edtwhere = edtwhere; }
 
     public String getDate() {
         return date;
