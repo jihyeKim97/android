@@ -1,8 +1,10 @@
 package com.example.androidproject_ver;
 
+import android.app.ActionBar;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,6 +67,7 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
         btnPrevious = view.findViewById(R.id.btnPrevious);
         btnNext = view.findViewById(R.id.btnNext);
         listView = view.findViewById(R.id.listView);
+
         gvCalender = view.findViewById(R.id.gvCalender);
         tvYearMonth = view.findViewById(R.id.tvYearMonth);
 
@@ -81,13 +84,13 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 MonthItem curItem = (MonthItem) monthAdapter.getItem(position);
 
-
                 curDate = monthAdapter.curYear + "/" + (monthAdapter.curMonth + 1);
                 if (curItem.getDayValue() != 0) {
                     myDBHelper = new MyDBHelper(myContext);
                     sqlDB = myDBHelper.getReadableDatabase();
                     Cursor cursor;
-                    cursor = sqlDB.rawQuery("SELECT * FROM calenderTBL WHERE date like '" + monthAdapter.curYear + "/" + (monthAdapter.curMonth + 1) + "/" + monthAdapter.items[position].getDayValue() + "/%';", null);
+                    cursor = sqlDB.rawQuery("SELECT * FROM calenderTBL WHERE date like '" + monthAdapter.curYear + "/"
+                            + (monthAdapter.curMonth + 1) + "/" + monthAdapter.items[position].getDayValue() + "/%';", null);
 
                     list.removeAll(list);
                     while (cursor.moveToNext()) {
@@ -110,6 +113,27 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
 
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, final View view, final int position, long id) {
+                MonthItem curItem1= (MonthItem) monthAdapter.getItem(position);
+
+                curDate = monthAdapter.curYear + "/" + (monthAdapter.curMonth + 1);
+                if (curItem1.getDayValue() != 0) {
+                    myDBHelper = new MyDBHelper(myContext);
+                    sqlDB = myDBHelper.getReadableDatabase();
+                    Cursor cursor;
+                    cursor = sqlDB.rawQuery("SELECT * FROM calenderTBL WHERE date like '" + monthAdapter.curYear + "/"
+                            + (monthAdapter.curMonth + 1) + "/" + monthAdapter.items[position].getDayValue() + "/%';", null);
+
+                    list.removeAll(list);
+                    while (cursor.moveToNext()) {
+                        String databaseCoinrdo = cursor.getString(1);
+                        String databaseCoinedttxt = cursor.getString(2);
+                        String databaseCoinfilter = cursor.getString(3);
+                        list.add(new MyList_Data(databaseCoinrdo, databaseCoinfilter, databaseCoinedttxt));
+                    }
+                    mylist_adapter.notifyDataSetChanged();
+                    cursor.close();
+                    sqlDB.close();
+                }
 
                 View dialogView = View.inflate(view.getContext(), R.layout.dialog, null);
                 final EditText edtLittle = (EditText) dialogView.findViewById(R.id.edtLittle);
@@ -205,6 +229,7 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
             case R.id.btnNext:
                 monthAdapter.setNextMonth();
                 monthAdapter.notifyDataSetChanged();
+
                 setYearMonth();
                 break;
             case R.id.btnPrevious:
