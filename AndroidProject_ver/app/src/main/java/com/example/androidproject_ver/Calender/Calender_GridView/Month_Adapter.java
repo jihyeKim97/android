@@ -6,11 +6,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.text.format.Time;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.androidproject_ver.Calender.Calender_LIstView.MyDBHelper;
 import com.example.androidproject_ver.Calender.Calender_LIstView.MyList_Data;
@@ -31,8 +33,8 @@ public class Month_Adapter extends BaseAdapter {
     public int firstDay;//예시 -> 11월 1일 = 금요일 = 5값을 저장
     public int mStartDay;//Calender.SUNDAY =  현재 달력 시작위치 요일(알요일 부터 보여준다)
     public int startDay;//Time.SUNDAY = 현재 달력 시작위치 요일(알요일 부터 보여준다)
-    public int curYear;//현재 달력년도
-    public int curMonth;//현재 달력의 월
+    public static int curYear;//현재 달력년도
+    public static int curMonth;//현재 달력의 월
     public int lastDay;//현재년도 현재달 마지막일
     public int selectedPosition = -1;//명시적 초기값 = -1
     public ArrayList<MyList_Data> list = new ArrayList<>();
@@ -82,24 +84,26 @@ public class Month_Adapter extends BaseAdapter {
         } else {
             MyDBHelper myDBHelper = new MyDBHelper(mContext);
             //쿼리문 실행
-            SQLiteDatabase sqlDB = myDBHelper.getWritableDatabase();
+            SQLiteDatabase sqlDB = myDBHelper.getReadableDatabase();
             Cursor cursor;
             //날짜로 검색한 모든데이타(디비에 있는 데이타)를 가져온다
-            cursor = sqlDB.rawQuery("SELECT * FROM calenderTBL WHERE date like '%" + curYear + "_" + curMonth + "_" + items[position] + "%';", null);
-            /*while () {
+            cursor = sqlDB.rawQuery("SELECT * FROM calenderTBL WHERE date like '" + curYear + "/" + (curMonth+1) + "/" + items[position].getDayValue() + "/%';", null);
+            /*while () {                 select * FROM calenderTBL WHERE date like'2019_12_18%';
                 String databaseDate = cursor.getColumnName(0);
                 String databaseCoinrdo = cursor.getColumnName(1);
                 String databaseCoinedttxt = cursor.getColumnName(2);
                 String databaseCoinfilter = cursor.getColumnName(3);
                 list.add(new MyList_Data(databaseDate,databaseCoinrdo,databaseCoinedttxt,databaseCoinfilter));
             }*/
-            if(cursor.getCount()!=0){
+
+            if(cursor.getCount() != 0){
                 image1.setVisibility(View.VISIBLE);
             }else{
                 image1.setVisibility(View.INVISIBLE);
             }
-            sqlDB.close();
+
             cursor.close();
+            sqlDB.close();
 
             txtDate.setText(String.valueOf(items[position].getDayValue()));
         }

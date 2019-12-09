@@ -57,7 +57,7 @@ public class MyList_Adapter extends BaseAdapter {
 
         if(listTextViewRdo.getText().toString().equals("수입")){
             listImgView.setImageResource(R.mipmap.income);
-        }else{
+        }else if(listTextViewRdo.getText().toString().equals("지출")){
             listImgView.setImageResource(R.mipmap.expenditure);
         }
 
@@ -66,6 +66,8 @@ public class MyList_Adapter extends BaseAdapter {
         listTextViewEdt.setText(list.get(position).getCoinedttxt());
 
         listTextViewCombo.setTag(position);
+
+
         return convertView;
     }
 }

@@ -1,12 +1,14 @@
 package com.example.androidproject_ver;
 
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -41,6 +43,7 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
     private String add;
     private View view;
     private String str;
+    private String curDate;
     private ImageView listImgView;
 
     private TextView listTextViewRdo, listTextViewCombo, listTextViewEdt;
@@ -77,10 +80,26 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 MonthItem curItem = (MonthItem) monthAdapter.getItem(position);
-                if (curItem.getDayValue() != 0) {
 
+
+                curDate = monthAdapter.curYear + "/" + (monthAdapter.curMonth + 1);
+                if (curItem.getDayValue() != 0) {
+                    myDBHelper = new MyDBHelper(myContext);
+                    sqlDB = myDBHelper.getReadableDatabase();
+                    Cursor cursor;
+                    cursor = sqlDB.rawQuery("SELECT * FROM calenderTBL WHERE date like '" + monthAdapter.curYear + "/" + (monthAdapter.curMonth + 1) + "/" + monthAdapter.items[position].getDayValue() + "/%';", null);
+
+                    list.removeAll(list);
+                    while (cursor.moveToNext()) {
+                        String databaseCoinrdo = cursor.getString(1);
+                        String databaseCoinedttxt = cursor.getString(2);
+                        String databaseCoinfilter = cursor.getString(3);
+                        list.add(new MyList_Data(databaseCoinrdo, databaseCoinfilter, databaseCoinedttxt));
+                    }
+                    mylist_adapter.notifyDataSetChanged();
+                    cursor.close();
+                    sqlDB.close();
                 }
-                Toast.makeText(getContext(), position+1 + "", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -104,24 +123,10 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         str = parent.getItemAtPosition(position).toString();
-
                     }
 
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
-                rdoPlus.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                    }
-                });
-                rdoMinus.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
                     }
                 });
 
@@ -141,10 +146,10 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
                         String strCurrnetHour = currnetHour.format(date);
                         String strCurrentMinuite = cuurentMinuite.format(date);
                         String strCurrentsecond = currentSecond.format(date);
-                        String dateTime = strCurrnetHour + "_" + strCurrentMinuite + "_" + strCurrentsecond;
+                        String dateTime = strCurrnetHour + "/" + strCurrentMinuite + "/" + strCurrentsecond;
 
-                        String curDate = monthAdapter.curYear + "_" + (monthAdapter.curMonth + 1) + "_" +
-                                curItem.getDayValue() + "_" + dateTime;
+                        curDate = monthAdapter.curYear + "/" + (monthAdapter.curMonth + 1) + "/" +
+                                curItem.getDayValue() + "/" + dateTime;
                         Toast.makeText(getContext(), curDate, Toast.LENGTH_LONG).show();
 
                         if (rdoPlus.isChecked() && !(spinnerFilter.getSelectedItem().toString().equals("필터를 설정해 주세요")) &&
@@ -155,7 +160,18 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
                                     + edtLittle.getText().toString() + "','" + spinnerFilter.getSelectedItem().toString() + "');");
                             sqlDB.close();
                             list.add(new MyList_Data(rdoPlus.getText().toString(), spinnerFilter.getSelectedItem().toString(), edtLittle.getText().toString()));
-                            Toast.makeText(view.getContext(), str + "(으)로 " + edtLittle.getText().toString() + "원의 수입이 발생하였습니다", Toast.LENGTH_LONG).show();
+
+                            myDBHelper = new MyDBHelper(myContext);
+                            sqlDB = myDBHelper.getReadableDatabase();
+                            Cursor cursor;
+                            cursor = sqlDB.rawQuery("SELECT * FROM calenderTBL", null);
+                            while (cursor.moveToNext()) {
+                                String exDate = cursor.getString(0);
+                                Toast.makeText(view.getContext(), exDate, Toast.LENGTH_LONG).show();
+                            }
+                            cursor.close();
+                            monthAdapter.notifyDataSetChanged();
+                            //Toast.makeText(view.getContext(), str + "(으)로 " + edtLittle.getText().toString() + "원의 수입이 발생하였습니다", Toast.LENGTH_LONG).show();
 
                         } else if (rdoMinus.isChecked() && !(spinnerFilter.getSelectedItem().toString().equals("필터를 설정해 주세요")) &&
                                 !(edtLittle.getText().toString().equals(""))) {
@@ -165,8 +181,8 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
                                     + edtLittle.getText().toString() + "','" + spinnerFilter.getSelectedItem().toString() + "');");
                             sqlDB.close();
                             list.add(new MyList_Data(rdoMinus.getText().toString(), spinnerFilter.getSelectedItem().toString(), edtLittle.getText().toString()));
+                            monthAdapter.notifyDataSetChanged();
                             Toast.makeText(view.getContext(), str + "(으)로 " + edtLittle.getText().toString() + "원의 지출이 발생하였습니다", Toast.LENGTH_LONG).show();
-
                         } else {
                             Toast.makeText(getContext(), "선택하지 않은 항목이 있습니다", Toast.LENGTH_LONG).show();
                         }
@@ -175,7 +191,6 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
                     }
                 });
                 dialog.setNegativeButton("취소", null);
-
                 dialog.show();
                 return true;
             }
@@ -198,6 +213,28 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
                 setYearMonth();
                 break;
         }
+    }
+
+    public void insertListData() {
+        myDBHelper = new MyDBHelper(myContext);
+        sqlDB = myDBHelper.getReadableDatabase();
+        Cursor cursor;//ResultSet과 같은 기능
+
+        //쿼리문을 실행한 데이터들을 전부 가져와서 저장
+        cursor = sqlDB.rawQuery("SELECT * FROM calenderTBL", null);
+        //리스트를 한번 초기화 시켜준다 = 초기화를 시켜주지 않으면 값이 계속 쌓인다
+        list.removeAll(list);
+        //반복문으로 값이 있으면 디비에있는 컬럼 0번째 1번째를 가져와서 각 객체를 만들어서 리스트로 저장
+        while (cursor.moveToNext()) {
+            String databaseDate = cursor.getColumnName(0);
+            String databaseCoinrdo = cursor.getColumnName(1);
+            String databaseCoinedttxt = cursor.getColumnName(2);
+            String databaseCoinfilter = cursor.getColumnName(3);
+            list.add(new MyList_Data(databaseDate, databaseCoinrdo, databaseCoinedttxt, databaseCoinfilter));
+        }
+        //자원을 닫아준다
+        cursor.close();
+        sqlDB.close();
     }
 
     // 월 표시 텍스트 설정
